@@ -1,79 +1,71 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { Form } from "antd";
+import UserForms from "./Form";
 
-import UserForm from "./UserForm";
-import UserInput from "./UserInput";
+import { useImmer } from "./hooks/useImmer";
 
-import { IForm } from "./UserForm";
-
-import { useModel } from "./hooks/useModel";
+import type { IClos } from "./Form";
 
 function App() {
-  const [state, newVal] = useModel({
-    phone: "1234",
-    pwd: "123",
-    msgCode: "xxx",
-    info: {
-      age: 20,
-      address: {
-        street: "xxx",
+  const [state, setState] = useImmer({ name: "" });
+  const ref = useRef();
+
+  const cols: IClos[] = [
+    {
+      tag: "TextArea",
+      key: "input",
+      props: {},
+      itemOptions: {
+        label: "密码",
+        name: "pwd",
       },
     },
-  });
-  const [forms, updateForms] = useState<IForm>({
-    phone: "1234",
-    pwd: "123",
-    msgCode: "xxx",
-    info: {
-      age: 20,
-      address: {
-        street: "xxx",
+    {
+      tag: "AutoComplete",
+      key: "autoComplete",
+      props: {},
+      itemOptions: {
+        label: "自动完成",
+        name: "pwd1",
+      },
+      children: 123,
+    },
+    {
+      tag: "Custom",
+      key: "custom1",
+      props: {},
+      itemOptions: {
+        label: "自动完成",
+        name: "pwd2",
+      },
+      children: () => {
+        return <input value={state.name} onInput={inputChange} />;
       },
     },
-  });
+  ];
 
-  const [count, setCount] = useState(0);
-
-  const ref = useRef<{
-    submit: () => Promise<IForm>;
-    form: any;
-  }>();
-
-  const submit = async () => {
-    const data = await ref.current?.submit();
-    if (data) {
-      updateForms({
-        ...forms,
-        ...data,
-      });
-    }
-  };
-
-  const emits = (data: IForm) => {
-    console.log("子组件传值", data);
-    updateForms({
-      ...forms,
-      ...data,
+  const inputChange = (e) => {
+    setState((draft) => {
+      draft.name = e.target.value;
     });
+    (ref.current as any)?.form.setFieldValue("pwd2", e.target.value);
   };
 
-  const update = (value: Record<string, any>) => {
-    updateForms({
-      ...forms,
-      ...value,
-    });
+  const submit = () => {
+    console.log((ref.current as any).form.getFieldsValue());
   };
+
+  useEffect(() => {
+    setState((draft) => {
+      draft.name = (ref.current as any)?.form.getFieldValue("pwd2");
+    });
+  }, []);
 
   return (
     <>
-      forms:{JSON.stringify(forms)}
-      count:{count}
-      newVal:{JSON.stringify(state)}
-      <UserForm forms={forms} ref={ref} emits={emits} />
-      <UserInput value={forms.info.address.street} setValue={update} keysName="info.address.street" />
-      <UserInput value={count} setValue={setCount} />
-      <input value={state.phone} onInput={(e) => (newVal.phone = e.target.value)} />
-      <input value={state.pwd} onInput={(e) => (newVal.pwd = e.target.value)} />
-      <button onClick={submit}>父组件提交</button>
+      {state.name}
+      <UserForms cols={cols} ref={ref} formOptions={{ initialValues: { pwd: "111", pwd1: "222", pwd2: "333" } }} />
+      <button onClick={submit}>submit</button>
     </>
   );
 }

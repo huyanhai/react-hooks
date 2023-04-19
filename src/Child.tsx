@@ -6,6 +6,7 @@ const Child = () => {
 
   /**
    * 没有依赖项，父组件change，该副作用会被重复执行，子组件有状态发生改变也会执行
+   * useEffect会在页面渲染完成后执行
    */
   useEffect(() => {
     console.log("没有依赖项");

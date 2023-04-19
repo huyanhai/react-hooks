@@ -8,6 +8,7 @@ const UserInput: FC<{
   setValue: (value: any) => void;
 }> = ({ keysName, value, setValue }) => {
   const update = (e) => {
+
     if (keysName) {
         const cache:any = {}
         const keysArr = keysName.split(".").reverse();

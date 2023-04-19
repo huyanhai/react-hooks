@@ -1,5 +1,5 @@
-import React, { FC, useEffect, forwardRef, useImperativeHandle } from "react";
-import { Form, Input, Button, message } from "antd";
+import React, { FC, useEffect, forwardRef, useImperativeHandle, useState } from "react";
+import { Form, Input, Button, message, Checkbox } from "antd";
 
 export interface IForm {
   phone: string;
@@ -14,6 +14,10 @@ const UserForm: FC<{
   emits: (data:IForm) => void
 }> = forwardRef(({ forms, emits }, parentRef) => {
   const [form] = Form.useForm<IForm>();
+
+  const [state,setState] = useState(1)
+
+  
 
   /**
    * 挂载的时候初始化表单数据
@@ -60,18 +64,30 @@ const UserForm: FC<{
     emits(form.getFieldsValue())
   }
 
+  const changeItem = () => {
+    setState(state === 1 ? 2 : 1)
+
+    console.log("state",state);
+    
+  }
+
   return (
     <Form form={form} name="form">
       <Form.Item name="phone" label="手机号" rules={[{ required: true, message: "手机号不能为空" }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="pwd" label="密码" rules={[{ required: true, message: "密码不能为空" }]}>
-        <Input />
-      </Form.Item>
+      {
+        state === 1 ? <Form.Item name="pwd" label="密码" rules={[{ required: true, message: "密码不能为空" }]}>
+          <Input />
+        </Form.Item> : <Form.Item name="pwd" label="密码" rules={[{ required: true, message: "密码不能为空" }]}>
+          <Checkbox />
+        </Form.Item>
+      }
       <Form.Item name="msgCode" label="验证码">
         <Input />
       </Form.Item>
       <Form.Item>
+        <Button onClick={changeItem}>change</Button>
         <Button type="primary" onClick={submit}>
           登录
         </Button>
