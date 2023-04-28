@@ -5,19 +5,23 @@ specifiers:
   '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react': ^3.1.0
   ahooks: ^3.7.6
+  alova: ^2.1.2
   antd: ^5.4.2
   immer: ^10.0.1
   react: ^18.2.0
   react-dom: ^18.2.0
   typescript: ^4.9.5
+  valtio: ^1.10.4
   vite: ^4.2.1
 
 dependencies:
   ahooks: 3.7.6_react@18.2.0
+  alova: 2.1.2
   antd: 5.4.2_biqbaboplfbrettd7655fr4n2y
   immer: 10.0.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  valtio: 1.10.4_react@18.2.0
 
 devDependencies:
   '@types/react': 18.0.35
@@ -710,6 +714,11 @@ packages:
       tslib: 2.5.0
     dev: false
 
+  /alova/2.1.2:
+    resolution: {integrity: sha512-VIJSOJ5oSjqO2mlvlq0M2wW46syqxCaYgHWveykjpqbuEbQR126kE1u0IXDMXwxjJnHlCjwEPDV1xPEYUdKO2A==}
+    engines: {node: '>= 0.12.0'}
+    dev: false
+
   /ansi-styles/3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
@@ -1033,6 +1042,10 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /proxy-compare/2.5.0:
+    resolution: {integrity: sha512-f1us0OsVAJ3tdIMXGQx2lmseYS4YXe4W+sKF5g5ww/jV+5ogMadPt+sIZ+88Ga9kvMJsrRNWzCrKPpr6pMWYbA==}
+    dev: false
 
   /qrcode.react/3.1.0_react@18.2.0:
     resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
@@ -1712,6 +1725,28 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
     dev: true
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /valtio/1.10.4_react@18.2.0:
+    resolution: {integrity: sha512-gqGWh0DjtDMAy8Jaui8ufFoxlQB1k1NiA/QHrpKoTUk9EeY331WKeYhvtGn1u703RcefrDCez7PT+qeCu9lWEw==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      react: '>=16.8'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      proxy-compare: 2.5.0
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
 
   /vite/4.2.1:
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
