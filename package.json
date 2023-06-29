@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.7.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "ahooks": "^3.7.6",
     "alova": "^2.1.2",
     "antd": "^5.4.2",
+    "framer-motion": "^10.12.17",
     "immer": "^10.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
